@@ -6,6 +6,10 @@ defmodule BlogsApiWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :auth do
+    plug BlogsApiWeb.Auth.Pipeline
+  end
+
   scope "/", BlogsApiWeb do
     pipe_through :api
     post "/user", UserController, :create

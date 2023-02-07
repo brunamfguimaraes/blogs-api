@@ -16,13 +16,11 @@ defmodule BlogsApiWeb.UserController do
     end
   end
 
-  """
-  def sign_in(conn, params) do
-    with {:ok, token} <- Guardian.authenticate(params) do
+  def sign_in(conn, %{"email" => email, "password" => password}) do
+    with {:ok, user, token} <- Guardian.authenticate(email, password) do
       conn
       |> put_status(:ok)
-      |> render("login.json", token: token)
+      |> render("login.json", %{user: user, token: token})
     end
   end
-"""
 end

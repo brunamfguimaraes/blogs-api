@@ -24,10 +24,4 @@ defmodule BlogsApi.User.Create do
   end
 
   defp email_exists?(result), do: result
-
-  # defp create_user(struct) do
-  # {:error, _changeset} = Repo.insert(struct)
-  # end
-
-  # defp create_user({:error, _changeset} = error), do: error
 end

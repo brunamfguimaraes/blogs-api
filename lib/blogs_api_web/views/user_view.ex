@@ -8,7 +8,6 @@ defmodule BlogsApiWeb.UserView do
         token: token
       }) do
     %{
-      message: "User Created!",
       user: %{
         id: id,
         display_name: display_name,
