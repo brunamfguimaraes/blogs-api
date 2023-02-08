@@ -15,8 +15,13 @@ defmodule BlogsApiWeb.ErrorView do
     %{errors: %{detail: Phoenix.Controller.status_message_from_template(template)}}
   end
 
+
   def render("400.json", %{result: %Ecto.Changeset{} = result}) do
     %{message: translate_errors(result)}
+  end
+
+  def render("400.json", _assign) do
+    %{errors: %{message: "Campos inválidos"}}
   end
 
   def render("409.json", %{message: message}) do
@@ -24,9 +29,8 @@ defmodule BlogsApiWeb.ErrorView do
  end
 
  def render("401.json", %{message: _message}) do
-  %{message: "teste"}
+  %{message: "Usuário não autorizado"}
 end
-
 
   defp translate_errors(changeset) do
     traverse_errors(changeset, fn {msg, opts} ->

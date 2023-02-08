@@ -2,6 +2,7 @@ defmodule BlogsApiWeb.FallbackController do
 
   use BlogsApiWeb, :controller
 
+
   def call(conn, {:error, :email_exists}) do
     conn
     |> put_status(:conflict)
@@ -22,4 +23,12 @@ defmodule BlogsApiWeb.FallbackController do
     |> put_view(BlogsApiWeb.ErrorView)
     |> render("400.json", result: result)
   end
+
+  def call(conn, {:error, message}) do
+    conn
+    |> put_status(:bad_request)
+    |> put_view(BlogsApiWeb.ErrorView)
+    |> render("400.json", message: message)
+  end
+
 end

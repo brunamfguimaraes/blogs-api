@@ -37,44 +37,4 @@ defmodule BlogsApiWeb.Auth.Guardian do
     {:ok, token, _claims} = encode_and_sign(user)
     {:ok, user, token}
   end
-
-
-
-
-
-
-
-
-
-
-
-"""
-  def authenticate(email, password) do
-   # with {:ok, user} <- Guardian.authenticate(email, password) |> IO.inspect(email) do
-    with {:ok, user} <- BlogsApi.User.Login.get_by_email(email) do
-      IO.inspect(user, "teste")
-      case validate_password(password) do
-        true ->
-          create_token(user)
-        false ->
-          {:error, :bad_request}
-      end
-    end
-  end
-
-
-  defp validate_password(password) do
-    password
-    |> IO.inspect()
-  end
-
-  defp create_token(user) do
-    {:ok, token, _claims} = encode_and_sign(user)
-    {:ok, user, token}
-  end
-
-
-"""
-
-
 end
