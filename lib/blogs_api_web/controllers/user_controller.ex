@@ -41,4 +41,9 @@ defmodule BlogsApiWeb.UserController do
   def sign_in(_conn, %{"password" => _password}) do
     {:error, "email is required"}
   end
+
+  def index(conn, _params) do
+    all_users = BlogsApi.User.GetAll.get_all_users()
+    render(conn, "index.json", all_users: all_users)
+  end
 end

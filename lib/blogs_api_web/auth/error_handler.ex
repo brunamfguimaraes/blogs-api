@@ -8,6 +8,7 @@ defmodule BlogsApiWeb.Auth.ErrorHandler do
     message =
       case body do
         "{\"error\":\"unauthenticated\"}" -> "Token não encontrado"
+        "{\"error\":\"invalid_token\"}" -> "Token expirado ou inválido"
       end
 
     conn

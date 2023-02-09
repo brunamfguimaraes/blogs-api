@@ -1,4 +1,5 @@
 defmodule BlogsApiWeb.Router do
+  #alias BlogsApiWeb.UserController
   # alias BlogsApiWeb.UserController
   use BlogsApiWeb, :router
 
@@ -12,8 +13,13 @@ defmodule BlogsApiWeb.Router do
 
   scope "/", BlogsApiWeb do
     pipe_through(:api)
-    post("/user", UserController, :create)
+    resources("/user", UserController, only: [:create, :index])
     post("/login", UserController, :sign_in)
+  end
+
+  scope "/", BlogsApiWeb do
+    pipe_through([:api, :auth])
+    resources("/user", UserController, only: [:show, :delete, :update])
   end
 
   # Enables LiveDashboard only for development
