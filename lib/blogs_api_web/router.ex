@@ -1,15 +1,19 @@
 defmodule BlogsApiWeb.Router do
-  #alias BlogsApiWeb.UserController
+  # alias BlogsApiWeb.UserController
   use BlogsApiWeb, :router
 
   pipeline :api do
-    plug :accepts, ["json"]
+    plug(:accepts, ["json"])
+  end
+
+  pipeline :auth do
+    plug(BlogsApiWeb.Auth.Pipeline)
   end
 
   scope "/", BlogsApiWeb do
-    pipe_through :api
-    post "/user", UserController, :create
-    post "/login", UserController, :sign_in
+    pipe_through(:api)
+    post("/user", UserController, :create)
+    post("/login", UserController, :sign_in)
   end
 
   # Enables LiveDashboard only for development
@@ -23,9 +27,9 @@ defmodule BlogsApiWeb.Router do
     import Phoenix.LiveDashboard.Router
 
     scope "/" do
-      pipe_through [:fetch_session, :protect_from_forgery]
+      pipe_through([:fetch_session, :protect_from_forgery])
 
-      live_dashboard "/dashboard", metrics: BlogsApiWeb.Telemetry
+      live_dashboard("/dashboard", metrics: BlogsApiWeb.Telemetry)
     end
   end
 
@@ -35,9 +39,9 @@ defmodule BlogsApiWeb.Router do
   # node running the Phoenix server.
   if Mix.env() == :dev do
     scope "/dev" do
-      pipe_through [:fetch_session, :protect_from_forgery]
+      pipe_through([:fetch_session, :protect_from_forgery])
 
-      forward "/mailbox", Plug.Swoosh.MailboxPreview
+      forward("/mailbox", Plug.Swoosh.MailboxPreview)
     end
   end
 end
