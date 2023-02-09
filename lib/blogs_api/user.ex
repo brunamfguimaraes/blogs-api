@@ -26,8 +26,6 @@ defmodule BlogsApi.User do
     %__MODULE__{}
     |> cast(params, @required_params)
     |> validate_required(@required_params)
-    |> validate_required(:email, message: "\"email\" is required")
-    |> validate_required(:password, message: "\"password\" is required")
     |> validate_length(:display_name,
       min: 8,
       message: "\"display_name\" length must be at least 8 characters long"
