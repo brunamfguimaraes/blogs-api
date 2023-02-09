@@ -7,6 +7,7 @@ defmodule BlogsApiWeb.Auth.Guardian do
 
   alias BlogsApi.User.Login
 
+  @spec subject_for_token(atom | %{:id => any, optional(any) => any}, any) :: {:ok, binary}
   def subject_for_token(user, _claims) do
     sub = to_string(user.id)
     {:ok, sub}

@@ -13,13 +13,13 @@ defmodule BlogsApiWeb.Router do
 
   scope "/", BlogsApiWeb do
     pipe_through(:api)
-    resources("/user", UserController, only: [:create, :index])
+    resources("/user", UserController, only: [:create])
     post("/login", UserController, :sign_in)
   end
 
   scope "/", BlogsApiWeb do
     pipe_through([:api, :auth])
-    resources("/user", UserController, only: [:show, :delete, :update])
+    resources("/user", UserController, only: [:show, :delete, :update, :index])
   end
 
   # Enables LiveDashboard only for development
