@@ -28,10 +28,6 @@ defmodule BlogsApiWeb.ErrorView do
     %{message: message}
  end
 
- def render("401.json", %{message: _message}) do
-  %{message: "Usuário não autorizado"}
-end
-
   defp translate_errors(changeset) do
     traverse_errors(changeset, fn {msg, opts} ->
       Regex.replace(~r"%{(\w+)}", msg, fn _, key ->

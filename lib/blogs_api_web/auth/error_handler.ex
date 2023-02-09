@@ -12,10 +12,6 @@ defmodule BlogsApiWeb.Auth.ErrorHandler do
       end
 
     conn
-    # |> put_status(:unauthorized)
-    # |> put_view(BlogsApiWeb.ErrorView)
-    # |> render("401.json", message: message)
-    # |> put_resp_content_type("application/json")
     |> send_resp(401, message)
   end
 end

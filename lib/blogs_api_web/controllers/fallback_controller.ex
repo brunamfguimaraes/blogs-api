@@ -10,13 +10,6 @@ defmodule BlogsApiWeb.FallbackController do
     |> render("409.json", message: "Usuário já existe")
   end
 
-  def call(conn, {:error, :unauthorized}) do
-    conn
-    |> put_status(:unauthorized)
-    |> put_view(BlogsApiWeb.ErrorView)
-    |> render("401.json", message: "User Unauthorized")
-  end
-
   def call(conn, {:error, result}) do
     conn
     |> put_status(:bad_request)
