@@ -24,6 +24,7 @@ defmodule BlogsApiWeb.Auth.Guardian do
       case validate_password(password, user.encrypted_password) do
         true ->
           create_token(user)
+
         false ->
           {:error, :bad_request}
       end

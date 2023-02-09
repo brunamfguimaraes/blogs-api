@@ -1,6 +1,5 @@
 defmodule BlogsApiWeb.Router do
-  #alias BlogsApiWeb.UserController
-  # alias BlogsApiWeb.UserController
+
   use BlogsApiWeb, :router
 
   pipeline :api do
