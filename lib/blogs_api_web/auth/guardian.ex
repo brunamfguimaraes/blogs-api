@@ -24,7 +24,7 @@ defmodule BlogsApiWeb.Auth.Guardian do
         true ->
           create_token(user)
         false ->
-          {:error, :bad_request}
+          {:error, :unauthorized}
       end
     end
   end
