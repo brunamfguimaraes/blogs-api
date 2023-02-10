@@ -53,6 +53,20 @@ defmodule BlogsApiWeb.UserController do
     |> handle_response(conn, "show.json", :ok)
   end
 
+  def delete(conn, %{"id" => id}) do
+    id
+    |> BlogsApi.delete_user()
+    |> handle_delete(conn)
+  end
+
+  defp handle_delete({:ok, _user}, conn) do
+    conn
+    |> put_status(:no_content)
+    |> text("")
+  end
+
+  defp handle_delete({:error, _reason} = error, _conn), do: error
+
   defp handle_response({:ok, user}, conn, view, status) do
     conn
     |> put_status(status)
