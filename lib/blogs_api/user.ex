@@ -16,7 +16,7 @@ defmodule BlogsApi.User do
   end
 
   @required_params ~w(display_name image)a
-  @allowed_params  @required_params ++ ~w(email password)a
+  @allowed_params @required_params ++ ~w(email password)a
   def build(params) do
     params
     |> changeset()
@@ -33,7 +33,7 @@ defmodule BlogsApi.User do
     )
     |> validate_length(:password, min: 6, message: "\"password\" length must be 6 characters long")
     |> validate_format(:email, ~r/@/, [{:message, "\"email\" must be a valid email"}])
-    |> unique_constraint(:email, message: "Usuário já existe")
+    |> unique_constraint(:email)
     |> put_pass_hash()
   end
 
