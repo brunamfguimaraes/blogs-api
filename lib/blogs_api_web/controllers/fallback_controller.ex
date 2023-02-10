@@ -3,7 +3,6 @@ defmodule BlogsApiWeb.FallbackController do
   use BlogsApiWeb, :controller
 
   def call(conn, {:error, :email_exists}) do
-    IO.inspect("testandoo")
     conn
     |> put_status(:conflict)
     |> put_view(BlogsApiWeb.ErrorView)
