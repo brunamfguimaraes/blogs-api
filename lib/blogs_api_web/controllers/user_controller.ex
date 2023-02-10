@@ -20,6 +20,7 @@ defmodule BlogsApiWeb.UserController do
     {:error, "\"email\" is not allowed to be empty"}
   end
 
+
   def sign_in(_conn, %{"password" => ""}) do
     {:error, "\"password\" is not allowed to be empty"}
   end
@@ -29,14 +30,13 @@ defmodule BlogsApiWeb.UserController do
       conn
       |> put_status(:ok)
       |> render("login.json", %{user: user, token: token})
-    else
-      _error -> {:error, "Campos inválidos"}
     end
   end
 
   def sign_in(_conn, %{"email" => _email}) do
     {:error, "password is required"}
   end
+
 
   def sign_in(_conn, %{"password" => _password}) do
     {:error, "email is required"}

@@ -15,7 +15,8 @@ defmodule BlogsApi.User do
     field(:image, :string)
   end
 
-  @required_params ~w(display_name email password image)a
+  @required_params ~w(display_name image)a
+  @allowed_params  @required_params ++ ~w(email password)a
   def build(params) do
     params
     |> changeset()
@@ -24,7 +25,7 @@ defmodule BlogsApi.User do
 
   def changeset(params) do
     %__MODULE__{}
-    |> cast(params, @required_params)
+    |> cast(params, @allowed_params)
     |> validate_required(@required_params)
     |> validate_required(:email, message: "\"email\" is required")
     |> validate_required(:password, message: "\"password\" is required")

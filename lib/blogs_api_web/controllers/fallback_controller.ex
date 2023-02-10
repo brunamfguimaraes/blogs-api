@@ -9,11 +9,11 @@ defmodule BlogsApiWeb.FallbackController do
     |> render("409.json", message: "Usuário já existe")
   end
 
-  def call(conn, {:error, result}) do
+  def call(conn, {:error, :invalid_login}) do
     conn
     |> put_status(:bad_request)
     |> put_view(BlogsApiWeb.ErrorView)
-    |> render("400.json", result: result)
+    |> render("400.json", message: "Campos inválidos")
   end
 
   def call(conn, {:error, message}) do

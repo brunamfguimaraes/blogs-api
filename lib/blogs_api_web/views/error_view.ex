@@ -20,8 +20,8 @@ defmodule BlogsApiWeb.ErrorView do
     %{message: translate_errors(result)}
   end
 
-  def render("400.json", _assign) do
-    %{errors: %{message: "Campos inválidos"}}
+  def render("400.json",  %{message: message}) do
+    %{errors: %{message: message}}
   end
 
   def render("409.json", %{message: message}) do
