@@ -11,7 +11,7 @@ defmodule BlogsApi.User.Delete do
 
   defp delete(uuid) do
     case fetch_user(uuid) do
-      nil -> {:error, "User not found!"}
+      nil -> {:error, "Usuário não encontrado!"}
       user -> Repo.delete(user)
     end
   end
