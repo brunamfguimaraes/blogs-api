@@ -8,6 +8,17 @@ defmodule BlogsApiWeb.UserView do
     render_many(all_users, UserView, "create_without_token.json")
   end
 
+  def render("show.json", %{
+        user: %User{id: id, display_name: display_name, email: email, image: image}
+      }) do
+    %{
+      id: id,
+      display_name: display_name,
+      email: email,
+      image: image
+    }
+  end
+
   def render("create_without_token.json", %{
         user: %User{id: id, display_name: display_name, email: email, image: image}
       }) do

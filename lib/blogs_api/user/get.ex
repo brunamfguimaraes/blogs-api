@@ -4,9 +4,10 @@ defmodule BlogsApi.User.Get do
 
   def call(id) do
     case UUID.cast(id) do
-      :error -> {:error, "Invalid ID format"}
+      :error -> {:error}
       {:ok, uuid} -> get(uuid)
     end
+
   end
 
   defp get(uuid) do

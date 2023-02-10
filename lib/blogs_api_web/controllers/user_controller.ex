@@ -46,4 +46,18 @@ defmodule BlogsApiWeb.UserController do
     all_users = BlogsApi.User.GetAll.get_all_users()
     render(conn, "index.json", all_users: all_users)
   end
+
+  def show(conn, %{"id" => id}) do
+    id
+    |> BlogsApi.fetch_user()
+    |> handle_response(conn, "show.json", :ok)
+  end
+
+  defp handle_response({:ok, user}, conn, view, status) do
+    conn
+    |> put_status(status)
+    |> render(view, user: user)
+  end
+
+  defp handle_response({:error} = error, _conn, _view, _status), do: error
 end
