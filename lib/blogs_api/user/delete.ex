@@ -1,4 +1,7 @@
 defmodule BlogsApi.User.Delete do
+  @moduledoc """
+  Função que encontra e deleta o id no banco de dados
+  """
   alias BlogsApi.{User, Repo}
   alias Ecto.UUID
 
