@@ -16,8 +16,8 @@ defmodule BlogsApiWeb.ErrorView do
   end
 
 
-  def render("400.json", %{result: %Ecto.Changeset{} = result}) do
-    %{message: translate_errors(result)}
+  def render("400.json", %{message: %Ecto.Changeset{} = message}) do
+    %{message: translate_errors(message)}
   end
 
   def render("400.json",  %{message: message}) do

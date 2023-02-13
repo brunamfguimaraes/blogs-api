@@ -1,5 +1,4 @@
 defmodule BlogsApiWeb.FallbackController do
-
   use BlogsApiWeb, :controller
 
   def call(conn, {:error, :email_exists}) do
@@ -7,6 +6,12 @@ defmodule BlogsApiWeb.FallbackController do
     |> put_status(:conflict)
     |> put_view(BlogsApiWeb.ErrorView)
     |> render("409.json", message: "Usuário já existe")
+  end
+
+  def call(conn, {:error}) do
+    conn
+    |> put_status(:not_found)
+    |> json(%{error: "Usuário não existe"})
   end
 
   def call(conn, {:error, :invalid_login}) do
