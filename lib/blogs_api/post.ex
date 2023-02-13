@@ -18,19 +18,19 @@ defmodule BlogsApi.Post do
   @required_params ~w(title content user_id)a
 
 
-  def build(params) do
-    params
-    |> changeset()
-    |> apply_action(:insert)
-  end
+  #def build(params) do
+    #params
+   # |> changeset()
+  #  |> apply_action(:insert)
+ # end
 
 
   def changeset(params) do
     %__MODULE__{}
     |> cast(params, @required_params)
-    |> validate_required(@required_params)
     |> validate_required(:title, message: "\"title\" is required")
     |> validate_required(:content, message: "\"content\" is required")
+    |> assoc_constraint(:user)
     |> foreign_key_constraint(:user_id)
   end
 end
