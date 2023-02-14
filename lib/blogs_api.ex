@@ -10,5 +10,5 @@ defmodule BlogsApi do
   defdelegate fetch_user(params), to: User.Get, as: :call
 
 
-  defdelegate create_post_user(params), to: Post.Create, as: :call
+  defdelegate create_post_user(user, params), to: Post.Create, as: :call
 end
