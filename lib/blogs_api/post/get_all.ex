@@ -17,5 +17,7 @@ defmodule BlogsApi.Post.GetAll do
     end
   end
 
-  def get_user_by_id!(id), do: Repo.get!(User, id)
+  def get_user_by_id!(id) do
+    Repo.get!(User, id)
+  end
 end
