@@ -3,7 +3,7 @@ defmodule BlogsApiWeb.PostController do
 
   alias BlogsApiWeb.Auth.Guardian
 
-  action_fallback BlogsApiWeb.FallbackController
+  action_fallback(BlogsApiWeb.FallbackController)
 
   def index(conn, _params) do
     all_posts = BlogsApi.Post.GetAll.get_all_posts()
@@ -16,6 +16,13 @@ defmodule BlogsApiWeb.PostController do
       conn
       |> put_status(:created)
       |> render("create.json", post: post)
+    end
+  end
+
+  def show(conn, %{"id" => id}) do
+    with {:ok, post} <- BlogsApi.fetch_post(id),
+         post_user <- BlogsApi.Post.GetAll.get_all_posts_users(post) do
+      render(conn, "show.json", post_user: post_user)
     end
   end
 end
