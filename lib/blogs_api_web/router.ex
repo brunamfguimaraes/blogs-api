@@ -21,6 +21,10 @@ defmodule BlogsApiWeb.Router do
     resources("/user", UserController, only: [:show, :delete, :update, :index])
   end
 
+  scope "/", BlogsApiWeb do
+    pipe_through([:api, :auth])
+    resources("/post", PostController, only: [:create, :show, :delete, :update, :index])
+  end
   # Enables LiveDashboard only for development
   #
   # If you want to use the LiveDashboard in production, you should put

@@ -55,7 +55,7 @@ defmodule BlogsApiWeb.UserController do
 
   def delete(conn, %{"id" => id}) do
     id
-    |> BlogsApi.delete_user()
+    |> Elixir.BlogsApi.delete_user()
     |> handle_delete(conn)
   end
 
