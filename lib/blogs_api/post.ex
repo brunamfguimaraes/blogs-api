@@ -30,4 +30,10 @@ defmodule BlogsApi.Post do
     put_assoc(changeset, :user, user)
   end
 
+  def update_changeset(post, params) do
+    post
+    |> cast(params, [:title, :content])
+    |> validate_required(:title, message: "\"title\" is required")
+    |> validate_required(:content, message: "\"content\" is required")
+  end
 end

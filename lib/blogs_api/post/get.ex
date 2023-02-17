@@ -4,7 +4,7 @@ defmodule BlogsApi.Post.Get do
 
   def call(id) do
     case UUID.cast(id) do
-      :error -> {:post_not_found}
+      :error -> {:error, :post_not_found}
       {:ok, uuid} -> get(uuid)
     end
 
