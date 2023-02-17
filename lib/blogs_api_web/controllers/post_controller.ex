@@ -28,7 +28,7 @@ defmodule BlogsApiWeb.PostController do
 
   def update(conn, params) do
     with current_user <- Guardian.Plug.current_resource(conn),
-     {:ok, post} <- BlogsApi.update_post_user(current_user, params) do
+         {:ok, post} <- BlogsApi.update_post_user(current_user, params) do
       conn
       |> put_status(:ok)
       |> render("create.json", post: post)

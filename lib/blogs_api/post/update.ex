@@ -23,9 +23,12 @@ defmodule BlogsApi.Post.Update do
     Repo.get(Post, uuid)
   end
 
-  defp update_post(post, params) do
+  defp update_post(post, %{"title" => _title, "content" => _content} = params) do
     post
     |> Post.update_changeset(params)
     |> Repo.update()
   end
+
+  defp update_post(_post, %{"title" => _title} = _params), do: {:error, "\"content\" is required"}
+  defp update_post(_post, %{"content" => _content} = _params), do: {:error, "\"title\" is required"}
 end
