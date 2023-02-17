@@ -1,4 +1,8 @@
 defmodule BlogsApi.Post.Update do
+  @moduledoc """
+  Módulo que pega o `id` do post, e atualiza o body (`title` e `content`),
+  baseado no que a pessoa usuária quiser alterar no campo
+  """
   alias BlogsApi.{Post, Repo}
   alias Ecto.UUID
 

@@ -1,4 +1,8 @@
 defmodule BlogsApi.Post do
+  @moduledoc """
+  Módulo que cria o Schema de POST e valida os campos necessários
+  de acordo com as validações exigidas
+  """
   use Ecto.Schema
   import Ecto.Changeset
 

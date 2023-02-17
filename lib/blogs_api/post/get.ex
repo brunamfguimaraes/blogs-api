@@ -1,4 +1,7 @@
 defmodule BlogsApi.Post.Get do
+  @moduledoc """
+  Módulo que busca um `id` de um POST no banco de dados
+  """
   alias BlogsApi.{Post, Repo}
   alias Ecto.UUID
 
@@ -7,7 +10,6 @@ defmodule BlogsApi.Post.Get do
       :error -> {:error, :post_not_found}
       {:ok, uuid} -> get(uuid)
     end
-
   end
 
   defp get(uuid) do
