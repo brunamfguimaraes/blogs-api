@@ -5,6 +5,7 @@ defmodule BlogsApiWeb.PostController do
 
   action_fallback(BlogsApiWeb.FallbackController)
 
+
   def index(conn, _params) do
     all_posts = BlogsApi.Post.GetAll.get_all_posts()
     render(conn, "index.json", all_posts: all_posts)
@@ -17,6 +18,11 @@ defmodule BlogsApiWeb.PostController do
       |> put_status(:created)
       |> render("create.json", post: post)
     end
+  end
+
+  def show(conn, %{"id" => "search", "q" => search_params}) do
+    search_posts = BlogsApi.Post.SearchTerm.search_by_term(search_params)
+    render(conn, "index.json",  all_posts: search_posts)
   end
 
   def show(conn, %{"id" => id}) do
