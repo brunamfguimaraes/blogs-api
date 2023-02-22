@@ -1,4 +1,7 @@
 defmodule BlogsApi.Post.SearchTerm do
+  @moduledoc """
+  Busca no parâmetro da URL o termo pesquisado dentro de `title` ou `content`
+  """
   import Ecto.Query, warn: false
   alias BlogsApi.{Post, Repo}
 
