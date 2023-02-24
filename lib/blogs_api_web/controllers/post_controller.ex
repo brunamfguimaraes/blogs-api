@@ -25,4 +25,18 @@ defmodule BlogsApiWeb.PostController do
       render(conn, "show.json", post_user: post_user)
     end
   end
+
+  def delete(conn, %{"id" => id}) do
+    id
+    |> Elixir.BlogsApi.delete_post()
+    |> handle_delete(conn)
+  end
+
+  defp handle_delete({:ok, _post}, conn) do
+    conn
+    |> put_status(:no_content)
+    |> text("")
+  end
+
+  defp handle_delete({:error, _reason} = error, _conn), do: error
 end
