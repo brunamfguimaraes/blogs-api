@@ -8,6 +8,13 @@ defmodule BlogsApiWeb.FallbackController do
     |> render("409.json", message: "Usuário já existe")
   end
 
+  def call(conn, {:post_not_found}) do
+    conn
+    |> put_status(:not_found)
+    |> json(%{error: "Post não existe"})
+  end
+
+
   def call(conn, {:error}) do
     conn
     |> put_status(:not_found)

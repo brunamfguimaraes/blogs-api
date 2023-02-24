@@ -17,6 +17,12 @@ defmodule BlogsApi.Post.GetAll do
     end
   end
 
+  def get_all_posts_users(post) do
+    with user <- get_user_by_id!(post.user_id) do
+      %{post: post, user: user}
+    end
+  end
+
   def get_user_by_id!(id) do
     Repo.get!(User, id)
   end
