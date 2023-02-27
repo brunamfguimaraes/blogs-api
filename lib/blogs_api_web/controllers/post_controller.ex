@@ -28,7 +28,7 @@ defmodule BlogsApiWeb.PostController do
 
   def delete(conn, %{"id" => id}) do
     id
-    |> BlogsApi.
+    |> BlogsApi.post_delete()
     |> handle_delete(conn)
   end
 
@@ -38,5 +38,5 @@ defmodule BlogsApiWeb.PostController do
     |> text("")
   end
 
-  defp handle_delete({:error, _reason} = error, _conn), do: error
+  defp handle_delete({:erro} = error, _conn), do: error
 end

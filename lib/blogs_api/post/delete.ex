@@ -10,11 +10,9 @@ defmodule BlogsApi.Post.Delete do
   end
 
   defp delete(uuid) do
-    case fetch_post(uuid) do
-      nil -> {:error, "Post não encontrado!"}
+    case Repo.get(Post, uuid) do
+      nil -> {:erro}
       post -> Repo.delete(post)
     end
   end
-
-  defp fetch_post(uuid), do: Repo.get(Post, uuid)
 end
