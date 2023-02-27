@@ -1,6 +1,12 @@
 defmodule BlogsApiWeb.FallbackController do
   use BlogsApiWeb, :controller
 
+  def call(conn, {:error, :unauthorized}) do
+    conn
+    |> put_status(:unauthorized)
+    |> json(%{error: "Usuário não autorizado"})
+  end
+
   def call(conn, {:error, :email_exists}) do
     conn
     |> put_status(:conflict)
@@ -8,7 +14,7 @@ defmodule BlogsApiWeb.FallbackController do
     |> render("409.json", message: "Usuário já existe")
   end
 
-  def call(conn, {:post_not_found}) do
+  def call(conn, {:error, :post_not_found}) do
     conn
     |> put_status(:not_found)
     |> json(%{error: "Post não existe"})
@@ -19,7 +25,7 @@ defmodule BlogsApiWeb.FallbackController do
   #   |> put_status(:not_found)
   #   |> json(%{error: "Post não existe"})
   # end
-
+  
   def call(conn, {:error}) do
     conn
     |> put_status(:not_found)

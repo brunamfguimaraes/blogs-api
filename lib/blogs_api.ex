@@ -12,4 +12,5 @@ defmodule BlogsApi do
   defdelegate post_delete(params), to: Post.Delete, as: :call
   defdelegate create_post_user(user, params), to: Post.Create, as: :call
   defdelegate fetch_post(params), to: Post.Get, as: :call
+  defdelegate update_post_user(current_user, params), to: Post.Update, as: :call
 end
