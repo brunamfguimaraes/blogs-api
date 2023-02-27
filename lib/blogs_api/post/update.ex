@@ -29,7 +29,7 @@ defmodule BlogsApi.Post.Update do
 
   defp update_post(post, %{"title" => _title, "content" => _content} = params) do
     post
-    |> Post.update_changeset(params)
+    |> BlogsApi.Post.update_changeset(params)
     |> Repo.update()
   end
 
