@@ -1,6 +1,6 @@
 defmodule BlogsApi.User.Get do
   @moduledoc """
-  Função que captura no banco de dados um usuário com base em seu ID
+  Função que captura no banco de dados um usuário com base em seu `id`
   """
   alias BlogsApi.{User, Repo}
   alias Ecto.UUID
