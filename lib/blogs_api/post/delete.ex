@@ -4,7 +4,7 @@ defmodule BlogsApi.Post.Delete do
 
   def call(id) do
     case UUID.cast(id) do
-      :error -> {:error, "Invalid ID format"}
+      :error -> {:erro}
       {:ok, uuid} -> delete(uuid)
     end
   end
