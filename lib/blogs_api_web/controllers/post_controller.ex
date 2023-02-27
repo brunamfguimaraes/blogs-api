@@ -28,7 +28,7 @@ defmodule BlogsApiWeb.PostController do
 
   def delete(conn, %{"id" => id}) do
     id
-    |> Elixir.BlogsApi.delete_post()
+    |> BlogsApi.
     |> handle_delete(conn)
   end
 
