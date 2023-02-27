@@ -20,6 +20,12 @@ defmodule BlogsApiWeb.FallbackController do
     |> json(%{error: "Post não existe"})
   end
 
+  # def call(conn, {:erro}) do
+  #   conn
+  #   |> put_status(:not_found)
+  #   |> json(%{error: "Post não existe"})
+  # end
+  
   def call(conn, {:error}) do
     conn
     |> put_status(:not_found)

@@ -26,6 +26,20 @@ defmodule BlogsApiWeb.PostController do
     end
   end
 
+  def delete(conn, %{"id" => id}) do
+    id
+    |> BlogsApi.post_delete()
+    |> handle_delete(conn)
+  end
+
+  defp handle_delete({:ok, _post}, conn) do
+    conn
+    |> put_status(:no_content)
+    |> text("")
+  end
+
+  defp handle_delete({:erro} = error, _conn), do: error
+  
   def update(conn, params) do
     with current_user <- Guardian.Plug.current_resource(conn),
          {:ok, post} <- BlogsApi.update_post_user(current_user, params) do
