@@ -28,7 +28,7 @@ defmodule BlogsApiWeb.PostController do
 
   def delete(conn, %{"id" => id}) do
     id
-    |> BlogsApi.delete_post()
+    |> BlogsApi.post_delete()
     |> handle_delete(conn)
   end
 
