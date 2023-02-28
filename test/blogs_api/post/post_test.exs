@@ -1,4 +1,7 @@
 defmodule BlogsApi.Post.PostTest do
+  @moduledoc """
+  Testa o Changeset do POST
+  """
   use BlogsApi.DataCase
 
   alias BlogsApi.Post
