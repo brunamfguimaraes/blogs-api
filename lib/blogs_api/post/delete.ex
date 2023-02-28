@@ -12,7 +12,7 @@ defmodule BlogsApi.Post.Delete do
     end
   end
 
-  defp delete(uuid) do
+  def delete(uuid) do
     case Repo.get(Post, uuid) do
       nil -> {:erro}
       post -> Repo.delete(post)
