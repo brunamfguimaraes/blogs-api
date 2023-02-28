@@ -1,4 +1,7 @@
 defmodule BlogsApi.Post.Delete do
+  @moduledoc """
+  Módulo que obtem um `id` de um POST no banco e deleta esse `id`
+  """
   alias BlogsApi.{Post, Repo}
   alias Ecto.UUID
 
