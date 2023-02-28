@@ -9,8 +9,8 @@ defmodule BlogsApi.Post.SearchTerm do
     query =
       from(p in Post,
         where:
-          like(p.title, ^"%#{search_params}%") or
-            like(p.content, ^"%#{search_params}%")
+          ilike(p.title, ^"%#{search_params}%") or
+            ilike(p.content, ^"%#{search_params}%")
       )
 
     get_posts = Repo.all(query)
