@@ -8,11 +8,12 @@ defmodule BlogsApiWeb.UserControllerTest do
 
   @params %{
     display_name: "Harry Potter",
-    password: "123456",
     email: "harry@email.com",
+    password: "123456",
     image:
       "https://ogimg.infoglobo.com.br/in/24440303-24f-31c/FT1086A/87996533_SCAtor-Daniel-Redcliff-como-Harry-Potter.-Foto-Divulgacao.jpg"
   }
+  @login_params %{email: "harry@email.com", password: "123456"}
 
   defp setup_user(%{conn: conn}) do
     {:ok, user} = BlogsApi.create_user(@params)
@@ -21,6 +22,21 @@ defmodule BlogsApiWeb.UserControllerTest do
     conn = put_req_header(conn, "authorization", "Bearer #{token}")
     {:ok, conn: conn}
     %{conn: conn, user: user}
+  end
+
+  describe "login" do
+    setup :setup_user
+
+    test "Verifica se é possível fazer login com sucesso", %{conn: conn} do
+      conn = get(conn, Routes.user_path(conn, :create), @params)
+      assert %{
+        "user" =>
+          "display_name" => "Harry Potter",
+          "email" => "harry@email.com",
+          "password" => "123456",
+          "image" =>
+          "https://ogimg.infoglobo.com.br/in/24440303-24f-31c/FT1086A/87996533_SCAtor-Daniel-Redcliff-como-Harry-Potter.-Foto-Divulgacao.jpg"} = json_response(conn, :ok)
+    end
   end
 
   describe "show/2" do
@@ -47,6 +63,44 @@ defmodule BlogsApiWeb.UserControllerTest do
         |> json_response(:not_found)
 
       assert %{"error" => "Usuário não existe"} == response
+    end
+  end
+
+  describe "index/1" do
+    setup :setup_user
+
+    test "Retorna todas as pessoas usuárias", %{conn: conn} do
+      response =
+        get(conn, Routes.user_path(conn, :index))
+        |> json_response(:ok)
+
+      assert response
+    end
+  end
+
+  describe "create" do
+
+    test "Cria um User quando os parâmetros são válidos", %{conn: conn} do
+      conn = post(conn, Routes.user_path(conn, :create), @params)
+
+      assert %{
+        "user" => %{
+          "id" => _id,
+          "display_name" => "Harry Potter",
+          "email" => "harry@email.com",
+          "image" => "https://ogimg.infoglobo.com.br/in/24440303-24f-31c/FT1086A/87996533_SCAtor-Daniel-Redcliff-como-Harry-Potter.-Foto-Divulgacao.jpg"
+        }
+      } = json_response(conn, 201)
+    end
+  end
+
+  describe "delete" do
+    setup :setup_user
+
+    test "Retorna `Usuário não encontrado!` quando User não existe", %{conn: conn} do
+      not_found_id = Ecto.UUID.generate()
+      connection = delete(conn, Routes.user_path(conn, :delete, not_found_id))
+      assert json_response(connection, 400)
     end
   end
 end
