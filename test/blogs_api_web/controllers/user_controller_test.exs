@@ -1,4 +1,7 @@
 defmodule BlogsApiWeb.UserControllerTest do
+  @moduledoc """
+  Módulo de teste do UserController
+  """
   use BlogsApiWeb.ConnCase, async: true
 
   import BlogsApiWeb.Auth.Guardian

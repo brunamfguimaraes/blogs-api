@@ -1,4 +1,7 @@
 defmodule BlogsApiWeb.PostControllerTest do
+  @moduledoc """
+  Módulo de teste do PostController
+  """
 
   import BlogsApiWeb.Auth.Guardian
   use BlogsApiWeb.ConnCase, async: true
@@ -20,10 +23,10 @@ defmodule BlogsApiWeb.PostControllerTest do
       {:ok, conn: conn}
     end
 
-    test "Retorna `não encontrado` quando Post não existe", %{conn: conn} do
+    test "Retorna `Post não existe` quando Post não existe", %{conn: conn} do
       not_found_id = Ecto.UUID.generate()
       connection = delete(conn, Routes.post_path(conn, :delete, not_found_id))
-      assert json_response(connection, :no_content)
+      assert json_response(connection, :not_found)
     end
   end
 end

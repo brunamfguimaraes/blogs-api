@@ -1,4 +1,7 @@
 defmodule BlogsApi.User.UserTest do
+  @moduledoc """
+  Testa o Changeset do USER
+  """
   use BlogsApi.DataCase
 
   alias BlogsApi.User
