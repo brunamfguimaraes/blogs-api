@@ -13,7 +13,6 @@ defmodule BlogsApiWeb.UserControllerTest do
     image:
       "https://ogimg.infoglobo.com.br/in/24440303-24f-31c/FT1086A/87996533_SCAtor-Daniel-Redcliff-como-Harry-Potter.-Foto-Divulgacao.jpg"
   }
-  @login_params %{email: "harry@email.com", password: "123456"}
 
   defp setup_user(%{conn: conn}) do
     {:ok, user} = BlogsApi.create_user(@params)
@@ -29,13 +28,56 @@ defmodule BlogsApiWeb.UserControllerTest do
 
     test "Verifica se é possível fazer login com sucesso", %{conn: conn} do
       conn = get(conn, Routes.user_path(conn, :create), @params)
-      assert %{
-        "user" =>
-          "display_name" => "Harry Potter",
-          "email" => "harry@email.com",
-          "password" => "123456",
-          "image" =>
-          "https://ogimg.infoglobo.com.br/in/24440303-24f-31c/FT1086A/87996533_SCAtor-Daniel-Redcliff-como-Harry-Potter.-Foto-Divulgacao.jpg"} = json_response(conn, :ok)
+
+      assert [
+               %{
+                 "user" => %{
+                   "display_name" => "Harry Potter",
+                   "email" => "harry@email.com",
+                   "image" =>
+                     "https://ogimg.infoglobo.com.br/in/24440303-24f-31c/FT1086A/87996533_SCAtor-Daniel-Redcliff-como-Harry-Potter.-Foto-Divulgacao.jpg"
+                 }
+               }
+             ] = json_response(conn, :ok)
+    end
+
+    test "Não é possível fazer login sem o campo `email`", %{conn: conn} do
+      invalid_user = %{
+        display_name: "Harry Potter",
+        image:
+          "https://ogimg.infoglobo.com.br/in/24440303-24f-31c/FT1086A/87996533_SCAtor-Daniel-Redcliff-como-Harry-Potter.-Foto-Divulgacao.jpg",
+        password: "123456"
+      }
+
+      conn = post(conn, Routes.user_path(conn, :create), user: invalid_user)
+      assert %{"message" => %{"email" => ["\"email\" is required"]}} = json_response(conn, 400)
+    end
+
+    test "Não é possível fazer login sem o campo `password`", %{conn: conn} do
+      invalid_user = %{
+        display_name: "Harry Potter",
+        email: "harry@email.com",
+        image:
+          "https://ogimg.infoglobo.com.br/in/24440303-24f-31c/FT1086A/87996533_SCAtor-Daniel-Redcliff-como-Harry-Potter.-Foto-Divulgacao.jpg"
+      }
+
+      conn = post(conn, Routes.user_path(conn, :create), user: invalid_user)
+
+      assert %{"message" => %{"password" => ["\"password\" is required"]}} =
+               json_response(conn, 400)
+    end
+
+    test "Não é possível fazer login com o campo `email` em branco", %{conn: conn} do
+      invalid_user = %{
+        display_name: "Harry Potter",
+        email: "",
+        image:
+          "https://ogimg.infoglobo.com.br/in/24440303-24f-31c/FT1086A/87996533_SCAtor-Daniel-Redcliff-como-Harry-Potter.-Foto-Divulgacao.jpg",
+        password: "123456"
+      }
+
+      conn = post(conn, Routes.user_path(conn, :create), user: invalid_user)
+      assert %{"message" => %{"email" => ["\"email\" is required"]}} = json_response(conn, 400)
     end
   end
 
@@ -79,18 +121,32 @@ defmodule BlogsApiWeb.UserControllerTest do
   end
 
   describe "create" do
-
     test "Cria um User quando os parâmetros são válidos", %{conn: conn} do
       conn = post(conn, Routes.user_path(conn, :create), @params)
 
       assert %{
-        "user" => %{
-          "id" => _id,
-          "display_name" => "Harry Potter",
-          "email" => "harry@email.com",
-          "image" => "https://ogimg.infoglobo.com.br/in/24440303-24f-31c/FT1086A/87996533_SCAtor-Daniel-Redcliff-como-Harry-Potter.-Foto-Divulgacao.jpg"
-        }
-      } = json_response(conn, 201)
+               "user" => %{
+                 "id" => _id,
+                 "display_name" => "Harry Potter",
+                 "email" => "harry@email.com",
+                 "image" =>
+                   "https://ogimg.infoglobo.com.br/in/24440303-24f-31c/FT1086A/87996533_SCAtor-Daniel-Redcliff-como-Harry-Potter.-Foto-Divulgacao.jpg"
+               }
+             } = json_response(conn, 201)
+    end
+
+    test "Valida que não é possível cadastrar um User com o `display_name` com menos de 8 caracteres",
+         %{conn: conn} do
+      invalid_params = %{
+        display_name: "Harry",
+        email: "harry@email.com",
+        image:
+          "https://ogimg.infoglobo.com.br/in/24440303-24f-31c/FT1086A/87996533_SCAtor-Daniel-Redcliff-como-Harry-Potter.-Foto-Divulgacao.jpg",
+        password: "123456"
+      }
+
+      conn = post(conn, Routes.user_path(conn, :create), user: invalid_params)
+      assert %{"message" => %{"display_name" => ["can't be blank"]}} = json_response(conn, 400)
     end
   end
 
