@@ -1,18 +1,18 @@
-CREATE TABLE "users" (
-  "id" int PRIMARY KEY,
-  "display_name" varchar,
-  "email" varchar,
-  "password" varchar,
+Table "users" {
+  "id" int [pk]
+  "display_name" varchar
+  "email" varchar
+  "password" varchar
   "image" varchar
-);
+}
 
-CREATE TABLE "posts" (
-  "id" int PRIMARY KEY,
-  "title" varchar,
-  "content" varchar,
-  "user_id" varchar,
-  "published" timestamp,
-  "updated" timestamp
-);
+Table "posts" {
+  "id" int [pk]
+  "title" varchar
+  "content" varchar
+  "user_id" varchar
+  "inserted_at" timestamp
+  "updated_at" timestamp
+}
 
-ALTER TABLE "posts" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+Ref:"users"."id" < "posts"."user_id"
