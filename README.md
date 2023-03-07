@@ -1,5 +1,59 @@
 # Boas vindas ao repositório do API de Blogs!
 
+## Instalando o projeto
+
+<details>
+  <summary>Instalação local</summary>
+
+#### Usando [asdf](http://asdf-vm.com/)
+
+Vá na raiz do projeto e execute:
+
+```sh
+asdf install
+```
+
+### Para instalar
+
+1.  Clone o repositório
+
+    ```sh
+    git clone git@github.com:brunamfguimaraes/blogs-api.git && cd blogs-api
+    ```
+
+2.  Depois, instale as dependências
+
+    ```sh
+    mix deps.get
+    ```
+
+3.  Por último, crie o banco de dados e então rode as migrations
+
+    ```sh
+    mix ecto.create
+    mix ecto.migrate
+    ```
+
+### Iniciando a aplicação
+
+Inicie o server:
+
+```sh
+mix phx.server
+```
+
+#### Testes
+
+Para rodar os testes, execute o seguinte comando no terminal:
+
+```sh
+mix test
+```
+</details>
+
+<details>
+  <summary>Desenvolvimento</summary>
+  
 ## O que deverá ser desenvolvido
 
 Você vai arquiteturar e desenvolver uma API de um CRUD de posts de blog. Começando pela API, você vai desenvolver alguns endpoints (seguindo os principios do REST) que estarão conectados ao seu banco de dados.
@@ -7,13 +61,11 @@ Você vai arquiteturar e desenvolver uma API de um CRUD de posts de blog. Começ
 Primeiro, você irá criar uma tabela para os usuários que desejam se cadastrar na aplicação. Após isso, a tabela blogPost será seu foco, guardando todas as informações dos posts realizados na plataforma. Essa é apenas uma recomendação!
 
 ---
+</details>
 
-### Data de Entrega
-
-O projeto deverá ser entregue até 7 dias depois de você ter recebido as instruções.
-
----
-
+<details>
+  <summary>Requisitos do projeto</summary>
+  
 ## Requisitos Obrigatórios:
 
 ### 0 – Banco de Dados
@@ -641,3 +693,5 @@ Crie esse projeto em sua conta no **GitHub** e nos envie o link do repositório.
 ps: Lembre-se de deixar o repositório público para que possamos ter acesso ao código
 
 #VQV
+
+</details>
