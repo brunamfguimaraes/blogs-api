@@ -26,9 +26,8 @@ defmodule BlogsApiWeb.PostController do
   end
 
   def show(conn, %{"id" => id}) do
-    with {:ok, post} <- BlogsApi.fetch_post(id),
-         post_user <- BlogsApi.Post.GetAll.get_all_posts_users(post) do
-      render(conn, "show.json", post_user: post_user)
+    with {:ok, post} <- BlogsApi.fetch_post(id) do
+      render(conn, "show.json", post: post)
     end
   end
 

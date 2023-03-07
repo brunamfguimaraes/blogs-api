@@ -1,0 +1,18 @@
+CREATE TABLE "users" (
+  "id" int PRIMARY KEY,
+  "display_name" varchar,
+  "email" varchar,
+  "password" varchar,
+  "image" varchar
+);
+
+CREATE TABLE "posts" (
+  "id" int PRIMARY KEY,
+  "title" varchar,
+  "content" varchar,
+  "user_id" varchar,
+  "published" timestamp,
+  "updated" timestamp
+);
+
+ALTER TABLE "posts" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
