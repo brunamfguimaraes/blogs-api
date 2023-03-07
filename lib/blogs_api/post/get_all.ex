@@ -6,22 +6,23 @@ defmodule BlogsApi.Post.GetAll do
 
   def get_all_posts() do
     Repo.all(Post)
-    |> get_all_posts_users()
+    |> Repo.preload(:user)
+   # |> get_all_posts_users()
   end
 
-  def get_all_posts_users([]), do: []
+  # def get_all_posts_users([]), do: []
 
-  def get_all_posts_users([post | posts]) do
-    with user <- get_user_by_id!(post.user_id) do
-      [%{post: post, user: user} | get_all_posts_users(posts)]
-    end
-  end
+  # def get_all_posts_users([post | posts]) do
+  #   with user <- get_user_by_id!(post.user_id) do
+  #     [%{post: post, user: user} | get_all_posts_users(posts)]
+  #   end
+  # end
 
-  def get_all_posts_users(post) do
-    with user <- get_user_by_id!(post.user_id) do
-      %{post: post, user: user}
-    end
-  end
+  # def get_all_posts_users(post) do
+  #   with user <- get_user_by_id!(post.user_id) do
+  #     %{post: post, user: user}
+  #   end
+  # end
 
   def get_user_by_id!(id) do
     Repo.get!(User, id)

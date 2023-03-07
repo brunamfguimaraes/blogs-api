@@ -16,22 +16,22 @@ defmodule BlogsApiWeb.PostView do
     }
   end
 
-  def render("show.json", %{post_user: post_user}) do
-    render_one(post_user, PostView, "post.json")
-  end
+  # def render("show.json", %{post_user: post_user}) do
+  #   render_one(post_user, PostView, "post.json")
+  # end
 
   def render("index.json", %{all_posts: all_posts}) do
-    render_many(all_posts, PostView, "post.json")
+    render_many(all_posts, PostView, "show.json")
   end
 
-  def render("post.json", %{post: %{post: post, user: user}}) do
+  def render("show.json",  %{post: post}) do
     %{
       id: post.id,
       title: post.title,
       content: post.content,
       published: post.inserted_at,
       updated: post.updated_at,
-      user: render("user.json", %{user: user})
+      user: render("user.json", %{user: post.user})
     }
   end
 

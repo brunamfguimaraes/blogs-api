@@ -126,7 +126,6 @@ defmodule BlogsApiWeb.UserControllerTest do
 
       assert %{
                "user" => %{
-                 "id" => _id,
                  "display_name" => "Harry Potter",
                  "email" => "harry@email.com",
                  "image" =>

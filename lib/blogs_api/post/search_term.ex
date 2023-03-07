@@ -13,11 +13,8 @@ defmodule BlogsApi.Post.SearchTerm do
             ilike(p.content, ^"%#{search_params}%")
       )
 
-    get_posts = Repo.all(query)
+    Repo.all(query)
+    |> Repo.preload(:user)
 
-    case get_posts do
-      [] -> []
-      _ -> Post.GetAll.get_all_posts_users(get_posts)
-    end
   end
 end

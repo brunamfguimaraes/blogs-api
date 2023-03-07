@@ -15,7 +15,7 @@ defmodule BlogsApi.Post.Get do
   defp get(uuid) do
     case Repo.get(Post, uuid) do
       nil -> {:error, "Post não existe"}
-      post -> {:ok, post}
+      post -> {:ok, Repo.preload(post, :user)}
     end
   end
 end

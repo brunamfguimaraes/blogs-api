@@ -1,0 +1,277 @@
+FORMAT: 1A
+HOST: http://localhost:4000
+
+# API de Blogs
+
+Criação de uma API de blogs.
+
+## Blogs API Collection [/user]
+
+### Faz o login uma pessoa usuária [POST /login]
+Loga no sistema uma pessoa usuária
+
++ Request (application/json)
+     + Attributes (LoginUser)
++ Response 200 (application/json)
+    + Attributes (TokenUser)
++ Response 400 (application/json)
+    + Attributes (ErrorInvalidFields)
+
+
+### Cria uma nova pessoa usuária [POST]
+Cadastra uma pessoa usuária
+
++ Request (application/json)
+     + Attributes (CreateUser)
++ Response 201 (application/json)
+    + Attributes (TokenUser)
++ Response 400 (application/json)
+    + Attributes (ErrorDisplayName)
++ Response 409 (application/json)
+    + Attributes (ErrorEmailAlreadyExists)
+
+
+### Lista todos as pessoas usuárias [GET]
+Retorna uma lista com todas as pessoas usuárias
++ Request
+    + Header
+
+            Accept: application/json
+            Content-Type: application/json
+            Authorization: JWT Token
+
++ Response 200 (application/json)
+    + Attributes (Users)
++ Response 401 (application/json)
+    + Attributes (Unauthorized)
+
+
+### Busca uma pessoa usuária pelo ID [GET /user/{id}]
+Retorna uma pessoa usuária buscando pelo ID
+
++ Parameters
+    + id: `c9eba101-5cbd-4e93-9061-0843c0a99f4d` - ID da pessoa usuária
+
++ Request
+    + Header
+
+            Accept: application/json
+            Content-Type: application/json
+            Authorization: JWT Token
+
++ Response 200 (application/json)
+    + Attributes (UsersWithoutPass)
++ Response 401 (application/json)
+    + Attributes (Unauthorized)
++ Response 404 (application/json)
+    + Attributes (NotFound)
+
+
+### Deleta pessoa usuária pelo ID [DELETE /user/{me}]
+Deleta, buscando pelo ID no banco de dados uma pessoa usuária
+
++ Parameters
+    + me: `c9eba101-5cbd-4e93-9061-0843c0a99f4d` - ID da pessoa usuária
+
++ Request
+    + Header
+
+            Accept: application/json
+            Content-Type: application/json
+            Authorization: JWT Token
+
++ Response 204 (application/json)
+    + Attributes ()
++ Response 401 (application/json)
+    + Attributes (Unauthorized)
+
+
+### Cria um novo post [POST /post]
+Cadastra um post
+
++ Request
+    + Header
+
+            Accept: application/json
+            Content-Type: application/json
+            Authorization: JWT Token
+
+    + Attributes (CreatePost)
++ Response 201 (application/json)
+    + Attributes (PostUser)
++ Response 401 (application/json)
+    + Attributes (Unauthorized)
++ Response 400 (application/json)
+    + Attributes (ContentIsRequired)
+
+
+### Lista todos os posts [GET /post]
+Retorna uma lista com os posts
++ Request
+    + Header
+
+            Accept: application/json
+            Content-Type: application/json
+            Authorization: JWT Token
+
++ Response 200 (application/json)
+    + Attributes (PostUser)
++ Response 401 (application/json)
+    + Attributes (Unauthorized)
+
+
+### Busca um post pelo ID [GET /post/{id}]
+Retorna um post buscando pelo ID
+
++ Parameters
+    + id: `9e376b44-fac3-4f59-97c6-284e02e6a8ff - ID do post
+
++ Request
+    + Header
+
+            Accept: application/json
+            Content-Type: application/json
+            Authorization: JWT Token
+
++ Response 200 (application/json)
+    + Attributes (PostUser)
++ Response 401 (application/json)
+    + Attributes (Unauthorized)
++ Response 404 (application/json)
+    + Attributes (PostNotFound)
+
+
+### Atualiza um post pelo ID [PUT /post/{id}]
+Retorna um post buscando pelo ID
+
++ Parameters
+    + id: `9e376b44-fac3-4f59-97c6-284e02e6a8ff - ID do post
+
++ Request
+    + Header
+
+            Accept: application/json
+            Content-Type: application/json
+            Authorization: JWT Token
+
++ Response 200 (application/json)
+    + Attributes (UpdatedPost)
++ Response 401 (application/json)
+    + Attributes (Unauthorized)
++ Response 400 (application/json)
+    + Attributes (ContentIsRequired)
+
+
+### Retorna todos os posts pelo termo pesquisado [GET /post/search?q={searchTerm}]
+Retorna um array de posts que contenham em seu título ou conteúdo o termo pesquisado na `queryParam` da URL
+
++ Parameters
+    + searchTerm: `conteúdo` - Conteúdo pesquisado na URL
+
++ Request
+    + Header
+
+            Accept: application/json
+            Content-Type: application/json
+            Authorization: JWT Token
+
++ Response 200 (application/json)
+    + Attributes (PostUser)
++ Response 401 (application/json)
+    + Attributes (Unauthorized)
+
+
+### Deleta um post pelo ID [DELETE /post/{id}]
+Deleta, buscando pelo ID no banco de dados um post
+
++ Parameters
+    + id: 9e376b44-fac3-4f59-97c6-284e02e6a8ff` - ID do post
+
++ Request
+    + Header
+
+            Accept: application/json
+            Content-Type: application/json
+            Authorization: JWT Token
+
++ Response 204 (application/json)
+    + Attributes ()
++ Response 401 (application/json)
+    + Attributes (Unauthorized)
++ Response 404 (application/json)
+    + Attributes (PostNotFound)
+
+# Data Structures
+
+## Users (object)
+- id: `c9eba101-5cbd-4e93-9061-0843c0a99f4d` (string) - ID da pessoa usuária
+- display_name: `Harry Potter` (string) - Nome da pessoa usuária
+- email: `harry@email.com` (string) - Email da pessoa usuária
+- password: `123456` (string) - Senha da pessoa usuária
+- image: `https://ogimg.infoglobo.com.br/in/24440303-24f-31c/FT1086A/87996533_SCAtor-Daniel-Redcliff-como-Harry-Potter.-Foto-Divulgacao.jpg` (string) - Imagem da pessoa usuária
+
+## UsersWithoutPass (object)
+- id: `c9eba101-5cbd-4e93-9061-0843c0a99f4d` (string) - ID da pessoa usuária
+- display_name: `Harry Potter` (string) - Nome da pessoa usuária
+- email: `harry@email.com` (string) - Email da pessoa usuária
+- image: `https://ogimg.infoglobo.com.br/in/24440303-24f-31c/FT1086A/87996533_SCAtor-Daniel-Redcliff-como-Harry-Potter.-Foto-Divulgacao.jpg` (string) - Imagem da pessoa usuária
+
+## LoginUser (object)
+- email: `harry@email.com` (string) - Email da pessoa usuária
+- password: `123456` (string) - Senha da pessoa usuária
+
+## CreateUser (object)
+- display_name: `Harry Potter` (string) - Nome da pessoa usuária
+- email: `harry@email.com` (string) - Email da pessoa usuária
+- password: `123456` (string) - Senha da pessoa usuária
+- image: `https://ogimg.infoglobo.com.br/in/24440303-24f-31c/FT1086A/87996533_SCAtor-Daniel-Redcliff-como-Harry-Potter.-Foto-Divulgacao.jpg` (string) - Imagem da pessoa usuária
+
+## TokenUser (object)
+- token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJibG9nc19hcGkiLCJleHAiOjE2NzkwODA5MzAsImlhdCI6MTY3NjY2MTczMCwiaXNzIjoiYmxvZ3NfYXBpIiwianRpIjoiODRiMzdiZWMtYTdmNC00NGE2LTk0ZDEtOTdkM2JjOTFmNjJmIiwibmJmIjoxNjc2NjYxNzI5LCJzdWIiOiI0ZWNiNzhmZi01ZjAzLTQ3ODItOTU5ZC0wNmUyMDY0MTg5MjUiLCJ0eXAiOiJhY2Nlc3MifQ.9hgS5xSyXufDMVvhCdMRgy8ChD_XhiC_sv3X9bJDXaW4atO9U62ELfWQ6jhzyS-vqsKY4WWlcsLBhCaZKVHa-A (string) - Token da pessoa usuária
+
+## Posts (object)
+- id: `9e376b44-fac3-4f59-97c6-284e02e6a8ff` (string) - ID do post
+- title: `título do post` (string) - Título do post
+- content: `conteúdo do post` (string) - Conteúdo do post
+- published: `2023-02-22T18:41:45` (string) - Quando o post foi publicado
+- updated: `2023-02-27T16:55:35` (string) - Quando o post foi atualizado
+
+## UpdatedPost (object)
+- title: `título do post atualizado` (string) - Título do post atualizado
+- content: `conteúdo do post atualizado` (string) - Conteúdo do post atualizado
+- user_id: `c9eba101-5cbd-4e93-9061-0843c0a99f4d` (string) - ID da pessoa usuária
+
+## CreatePost (object)
+- title: `título do post` (string) - Título do post
+- content: `conteúdo do post` (string) - Conteúdo do post
+- user_id: `c9eba101-5cbd-4e93-9061-0843c0a99f4d` (string) - ID da pessoa usuária
+
+## PostUser (object)
+- id: `9e376b44-fac3-4f59-97c6-284e02e6a8ff` (string) - ID do post
+- title: `título do post` (string) - Título do post
+- content: `conteúdo do post` (string) - Conteúdo do post
+- published: `2023-02-22T18:41:45` (string) - Quando o post foi publicado
+- updated: `2023-02-27T16:55:35` (string) - Quando o post foi atualizado
+- user (Users)
+
+
+## ErrorDisplayName (object)
+- message: `display_name length must be at least 8 characters long` (string)
+
+## ErrorEmailAlreadyExists (object)
+- message: `Usuário já existe` (string)
+
+## ErrorInvalidFields (object)
+- message: `Campos inválidos` (string)
+
+## Unauthorized (object)
+- message: `Token inválido` (string)
+
+## NotFound (object)
+- message: `Usuário não existe` (string)
+
+## PostNotFound (object)
+- message: `Post não existe` (string)
+
+## ContentIsRequired (object)
+- message: `content is required` (string)
