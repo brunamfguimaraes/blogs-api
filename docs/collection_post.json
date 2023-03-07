@@ -1,0 +1,168 @@
+{
+	"info": {
+		"_postman_id": "5b18809c-fcef-4449-8a37-a69a497e3b30",
+		"name": "blogs-api(POST)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20893892"
+	},
+	"item": [
+		{
+			"name": "POST/post",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJibG9nc19hcGkiLCJleHAiOjE2Nzg3OTg1MDMsImlhdCI6MTY3NjM3OTMwMywiaXNzIjoiYmxvZ3NfYXBpIiwianRpIjoiNzkyYzhkOGEtNmMyYy00MTIyLTk3NTgtODljMmM4ZTZlODM1IiwibmJmIjoxNjc2Mzc5MzAyLCJzdWIiOiIzNDJiODg3MS0wYmU5LTQzMGMtOGFkMS0xYTc5YTBlMDEzYTMiLCJ0eXAiOiJhY2Nlc3MifQ.0F-YY3wvWqtB2_tv8yY2ibJ4tu8DRTaXR35A1r0PRNKb7aQ_CfZfMXVcrxYzPNXsxZYilcTPeqCvBxkZeEbLDQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"Latest updates, August 1st\",\n  \"content\": \"The whole text for the blog post goes here in this key\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/post",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET/post",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET/post/:id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJibG9nc19hcGkiLCJleHAiOjE2Nzg5NzI4MTksImlhdCI6MTY3NjU1MzYxOSwiaXNzIjoiYmxvZ3NfYXBpIiwianRpIjoiMjg5ODVhNjItMDYxMS00NTY2LWIwZWUtNWNlMTk3YTVlNmU1IiwibmJmIjoxNjc2NTUzNjE4LCJzdWIiOiI0ODY5MTliNC03NGQxLTRlYTUtOTg3Yy02ZTNhNDEyY2Y2ZmEiLCJ0eXAiOiJhY2Nlc3MifQ.hm0Hnbr8CUhGmE3zc0On-GS5clj81bn2j_BgJp4ITZ2cJqNUMRnCsMUDf5XY3LvC_8r8PD43eLiptHlHwKvkMg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/post/486919b4-74d1-4ea5-987c-6e3a412cf6fa",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"post",
+						"486919b4-74d1-4ea5-987c-6e3a412cf6fa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT/post/:id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"Sou Ronny\",\n  \"content\": \"Você é meio assustadora às vezes, sabia?\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/post/68547613-5e26-421a-b564-66d638e6ccbe",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"post",
+						"68547613-5e26-421a-b564-66d638e6ccbe"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET/ post/searchTerm",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/post/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"post",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE/post/:id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJibG9nc19hcGkiLCJleHAiOjE2Nzk5MTg1MzAsImlhdCI6MTY3NzQ5OTMzMCwiaXNzIjoiYmxvZ3NfYXBpIiwianRpIjoiMTBlN2M1MzItMTE1Ni00MjFmLWJlM2YtMjQzZjIxNTlhYjRiIiwibmJmIjoxNjc3NDk5MzI5LCJzdWIiOiI0MGNiODgwOC1hYTFmLTQ2NTktYjk0Mi0wZmYwOTcxZjlmMDEiLCJ0eXAiOiJhY2Nlc3MifQ.LMqThYlQERcHyWJuAIOCEV9z6QmUmJJyBEFSHlD4EgFNUi6S78Q8AWFa6ASsdE79-nwHZQmCiZGv499-PqixWg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/user/71fec0cd-9894-4c6e-b13a-32",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"user",
+						"71fec0cd-9894-4c6e-b13a-32"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
